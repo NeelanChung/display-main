@@ -161,7 +161,7 @@ int main(void)
     u8g2_SendBuffer(&myDisplay); // Push buffer to screen
 
     HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
-    HAL_Delay(1000); 
+    HAL_Delay(2000); 
     
 
   }
