@@ -62,6 +62,7 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+//Callbacks
 uint8_t u8x8_gpio_and_delay(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int,
                             void *arg_ptr) {
   switch (msg) {
@@ -139,7 +140,7 @@ int main(void)
   MX_I2C1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  u8g2_Setup_ssd1306_128x32_univision_f(
+  u8g2_Setup_ssd1309_i2c_128x64_noname0_f(
       &myDisplay, U8G2_R0, u8x8_i2c,
       u8x8_gpio_and_delay);     // init u8g2 structure
   u8g2_InitDisplay(&myDisplay); // send init sequence to the display, display is
@@ -157,12 +158,16 @@ int main(void)
   while (1) {
     u8g2_ClearBuffer(&myDisplay); // Clear internal buffer (not the screen yet)
     u8g2_SetFont(&myDisplay, u8g2_font_ncenB08_tr);
-    u8g2_DrawStr(&myDisplay, 5, 5, "Powering on...");
+    u8g2_DrawStr(&myDisplay, 5, 10, "Bombaclatt");
+
+    u8g2_DrawCircle(&myDisplay, 64, 32, 20, U8G2_DRAW_ALL);
+    
+
+  
     u8g2_SendBuffer(&myDisplay); // Push buffer to screen
 
     HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
     HAL_Delay(2000); 
-    HAL_Delay(1000);
     HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
   }
 
@@ -354,4 +359,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
